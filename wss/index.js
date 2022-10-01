@@ -2,7 +2,7 @@ const cors = require('cors')
 const express = require('express')
 const initListener = require('./initListener')
 
-const corsConfigIO = { cors: { origin: 'http://localhost:4020' } }
+const corsConfigIO = { cors: { origin: ['http://localhost:4020', 'http://localhost:4030'] } }
 
 const app = express()
 const server = require('http').createServer(app)

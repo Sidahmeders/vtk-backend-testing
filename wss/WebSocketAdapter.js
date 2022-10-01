@@ -46,9 +46,7 @@ class WebSocketAdapter {
     return socketRooms
   }
 
-  joinSocketRooms(username, roomName) {
-    this.socket.roomName = roomName
-    this.socket.username = username
+  joinSocketRooms(roomName) {
     this.socket.join(roomName)
   }
 }
