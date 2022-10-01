@@ -8,15 +8,17 @@ module.exports = (wsEventEmitter) => {
   const disconnect = makeDisConnect({ wsEventEmitter, events })
   const getRoomData = makeGetRoomData({ wsEventEmitter, events })
   
-  const joinRooms = (payload) => {
-    console.log(payload, 'JOIN:ROOM')
-    wsEventEmitter.joinSocketRooms(payload.userId)
+  const peerJoin = (userId) => {
+    console.log('Join Room with user-id: ', userId)
+    wsEventEmitter.joinSocketRooms(userId)
   }
 
   const peerMessage = (payload) => {
     console.log(payload, 'PEER:MESSAGE')
-    wsEventEmitter.emit(events.peerMessaged, payload)
+    const { friendId, message } = payload
+    wsEventEmitter.sendToRoom(friendId, events.peerMessaged, message)
+    wsEventEmitter.emit(events.peerMessaged, message)
   }
 
-  return { connection, disconnect, joinRooms, getRoomData, peerMessage }
+  return { connection, disconnect, peerJoin, getRoomData, peerMessage }
 }
