@@ -15,9 +15,9 @@ module.exports = (wsEventEmitter) => {
 
   const peerMessage = (payload) => {
     console.log(payload, 'PEER:MESSAGE')
-    const { friendId, message } = payload
-    wsEventEmitter.sendToRoom(friendId, events.peerMessaged, message)
-    wsEventEmitter.emit(events.peerMessaged, message)
+    const { friendId } = payload
+    wsEventEmitter.sendToRoom(friendId, events.peerMessaged, payload)
+    wsEventEmitter.emit(events.peerMessaged, payload)
   }
 
   return { connection, disconnect, peerJoin, getRoomData, peerMessage }
